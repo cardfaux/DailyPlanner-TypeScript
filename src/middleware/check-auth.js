@@ -1,8 +1,8 @@
-const jwt = require('jsonwebtoken');
+import jwt from 'jsonwebtoken';
 
-const HttpError = require('../models/http-error');
+import HttpError from '../models/http-error';
 
-module.exports = (req, res, next) => {
+export default (req, res, next) => {
 	if (req.method === 'OPTIONS') {
 		return next();
 	}
