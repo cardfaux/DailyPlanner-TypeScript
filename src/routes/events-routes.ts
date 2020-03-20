@@ -4,6 +4,7 @@ import { check } from 'express-validator';
 import checkAuth from '../middleware/check-auth';
 
 import {
+	getEventById,
 	getMyEvents,
 	getEvents,
 	createMyEvents,
@@ -18,6 +19,8 @@ eventsRouter.get('/', getEvents);
 eventsRouter.use(checkAuth);
 
 eventsRouter.get('/me', getMyEvents);
+
+eventsRouter.get('/:eid', getEventById);
 
 eventsRouter.post(
 	'/',

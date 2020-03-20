@@ -11,6 +11,7 @@ import { StyledHomePage as HomePage } from './Pages/HomePage/HomePage';
 import Events from './Pages/Events/Events';
 import AddEvent from './Pages/Events/AddEvent/AddEvent';
 import EventLogs from './Pages/EventLogs/EventLogs';
+import EditEvent from './Pages/Events/EditEvent/EditEventPage';
 import Notes from './Pages/Notes/Notes';
 import AddNote from './Pages/Notes/AddNote/AddNote';
 import EditNote from './Pages/Notes/EditNote/EditNotePage';
@@ -33,6 +34,7 @@ const App: React.FunctionComponent = () => {
         <Route path='/events' exact component={Events} />
         <Route path='/events/logs' exact component={EventLogs} />
         <Route path='/add/event' exact component={AddEvent} />
+        <Route path='/event/edit/:eventId' exact component={EditEvent} />
         <Route path='/add/note' exact component={AddNote} />
         <Route path='/notes' exact component={Notes} />
         <Route path='/note/edit/:noteId' exact component={EditNote} />

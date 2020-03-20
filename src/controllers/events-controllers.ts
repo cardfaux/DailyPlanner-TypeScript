@@ -65,6 +65,45 @@ export const getMyEvents = async (
 	});
 };
 
+// @type -- GET
+// @path -- /api/events/:eid
+// @desc -- path to get a event by its id
+// @aces -- PRIVATE
+export const getEventById = async (
+	req: Request,
+	res: Response,
+	next: NextFunction
+) => {
+	const eventId = req.params.eid;
+
+	let event: any;
+	try {
+		event = await Event.findById(eventId);
+	} catch (err) {
+		const error = new HttpError(
+			'Something Went Wrong, Could Not Find Event',
+			500
+		);
+		return next(error);
+	}
+
+	if (!event || event.length === 0) {
+		const error = new HttpError(
+			'Could Not Find A Note For The Provided ID',
+			404
+		);
+		return next(error);
+	}
+
+	// Turns The Place Object Into A Normal JavaScript Object
+	// Getters: True Turns The Mongoose Model _id to id
+	res.json({
+		event: event.toObject({
+			getters: true
+		})
+	});
+};
+
 // @type -- POST
 // @path -- /api/events
 // @desc -- path to add events
