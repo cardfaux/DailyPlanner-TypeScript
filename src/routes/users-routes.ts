@@ -11,12 +11,12 @@ import {
 } from '../controllers/users-controllers';
 import fileUpload from '../middleware/file-upload';
 
-const router = express.Router();
+export const usersRouter = express.Router();
 
 // -----------------Users Routes Starts-----------------------------
-router.get('/', getUsers);
+usersRouter.get('/', getUsers);
 
-router.post(
+usersRouter.post(
 	'/signup',
 	fileUpload.single('image'),
 	[
@@ -31,9 +31,7 @@ router.post(
 	signup
 );
 
-router.post('/login', login);
+usersRouter.post('/login', login);
 
-router.get('/myData', checkAuth, getMyData);
+usersRouter.get('/myData', checkAuth, getMyData);
 // ----------------Users Routes Ends----------------------------------
-
-export default router;

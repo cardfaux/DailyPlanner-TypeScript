@@ -11,17 +11,17 @@ import {
 	deleteNoteById
 } from '../controllers/notes-controllers';
 
-const router = express.Router();
+export const notesRouter = express.Router();
 
 //router.get('/', getNotes);
 
-router.use(checkAuth);
+notesRouter.use(checkAuth);
 
-router.get('/me', getMyNotes);
+notesRouter.get('/me', getMyNotes);
 
-router.get('/:nid', getNoteById);
+notesRouter.get('/:nid', getNoteById);
 
-router.post(
+notesRouter.post(
 	'/',
 	[
 		check('title')
@@ -34,7 +34,7 @@ router.post(
 	createANewNote
 );
 
-router.patch(
+notesRouter.patch(
 	'/:nid',
 	[
 		check('title')
@@ -47,6 +47,4 @@ router.patch(
 	updateNoteById
 );
 
-router.delete('/:nid', deleteNoteById);
-
-export default router;
+notesRouter.delete('/:nid', deleteNoteById);

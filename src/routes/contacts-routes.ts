@@ -11,15 +11,15 @@ import {
 	deleteContactById
 } from '../controllers/contacts-controllers';
 
-const router = express.Router();
+export const contactsRouter = express.Router();
 
-router.get('/', getContacts);
+contactsRouter.get('/', getContacts);
 
-router.use(checkAuth);
+contactsRouter.use(checkAuth);
 
-router.get('/me', getMyContacts);
+contactsRouter.get('/me', getMyContacts);
 
-router.post(
+contactsRouter.post(
 	'/',
 	[
 		check('name')
@@ -32,7 +32,7 @@ router.post(
 	createMyContacts
 );
 
-router.patch(
+contactsRouter.patch(
 	'/:cid',
 	[
 		check('name')
@@ -45,6 +45,4 @@ router.patch(
 	updateContactById
 );
 
-router.delete('/:cid', deleteContactById);
-
-export default router;
+contactsRouter.delete('/:cid', deleteContactById);

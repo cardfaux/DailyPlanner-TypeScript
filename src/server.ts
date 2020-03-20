@@ -20,10 +20,10 @@ app.get('/', (req: Request, res: Response) => res.send('API RUNNING'));
 // Test Connection Route
 
 // Define Routes
-import userRoutes from './routes/users-routes';
-import eventRoutes from './routes/events-routes';
-import noteRoutes from './routes/notes-routes';
-import contactRoutes from './routes/contacts-routes';
+import { usersRouter } from './routes/users-routes';
+import { eventsRouter } from './routes/events-routes';
+import { notesRouter } from './routes/notes-routes';
+import { contactsRouter } from './routes/contacts-routes';
 import HttpError from './models/http-error';
 
 // BodyParser InIt
@@ -49,10 +49,10 @@ app.use((req, res, next) => {
 });
 
 // Bring In And Prefix Routes Middleware
-app.use('/api/users', userRoutes);
-app.use('/api/events', eventRoutes);
-app.use('/api/notes', noteRoutes);
-app.use('/api/contacts', contactRoutes);
+app.use('/api/users', usersRouter);
+app.use('/api/events', eventsRouter);
+app.use('/api/notes', notesRouter);
+app.use('/api/contacts', contactsRouter);
 
 // Default Error Handling MiddleWare
 app.use((req: Request, res: Response, next: NextFunction) => {

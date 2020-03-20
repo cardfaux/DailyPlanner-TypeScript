@@ -11,15 +11,15 @@ import {
 	updateEventById
 } from '../controllers/events-controllers';
 
-const router = express.Router();
+export const eventsRouter = express.Router();
 
-router.get('/', getEvents);
+eventsRouter.get('/', getEvents);
 
-router.use(checkAuth);
+eventsRouter.use(checkAuth);
 
-router.get('/me', getMyEvents);
+eventsRouter.get('/me', getMyEvents);
 
-router.post(
+eventsRouter.post(
 	'/',
 	[
 		check('title')
@@ -38,7 +38,7 @@ router.post(
 	createMyEvents
 );
 
-router.patch(
+eventsRouter.patch(
 	'/:eid',
 	[
 		check('title')
@@ -57,6 +57,4 @@ router.patch(
 	updateEventById
 );
 
-router.delete('/:eid', deleteEventById);
-
-export default router;
+eventsRouter.delete('/:eid', deleteEventById);
