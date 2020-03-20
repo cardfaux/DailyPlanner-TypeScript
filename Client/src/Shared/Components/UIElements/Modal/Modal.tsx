@@ -47,6 +47,8 @@ const ModalOverlay: React.FunctionComponent<OverlayProps> = (props) => {
 interface Modal {
   show?: boolean;
   onCancel?: () => void;
+  header?: string;
+  footer?: any;
 }
 
 const Modal: React.FunctionComponent<Modal> = (props) => {
