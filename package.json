@@ -6,8 +6,10 @@
 	"scripts": {
 		"start": "node dist/server.js",
 		"server-dev": "nodemon src/server.ts",
+		"server": "ts-node ./src/server.ts",
 		"client": "npm run dev --prefix Client",
 		"dev": "concurrently \"npm run server-dev\" \"npm run client\"",
+		"dev-server": "concurrently \"npm run server\" \"npm run client\"",
 		"clientClear": "npm run clear-build-cache --prefix Client",
 		"build": "tsc -p .",
 		"devClear": "concurrently \"npm run clientClear\""
