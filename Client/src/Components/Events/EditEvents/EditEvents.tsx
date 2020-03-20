@@ -177,6 +177,7 @@ const EditEvents: React.FunctionComponent<EditProps> = (props) => {
           <Input
             id='start'
             element='input'
+            type='date'
             label='Start Date'
             validators={[VALIDATOR_REQUIRE()]}
             errorText='Please enter a valid start date.'
@@ -187,6 +188,7 @@ const EditEvents: React.FunctionComponent<EditProps> = (props) => {
           <Input
             id='end'
             element='input'
+            type='date'
             label='End Date'
             validators={[VALIDATOR_REQUIRE()]}
             errorText='Please enter a valid end date.'
