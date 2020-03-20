@@ -8,7 +8,9 @@ const Events: React.FunctionComponent = () => {
   return (
     <React.Fragment>
       <StyledDiv>
-        <Button to='/events/logs'>Go To Event Logs</Button>
+        <Button inverse to='/events/logs'>
+          Go To Event Logs
+        </Button>
       </StyledDiv>
       <Calendar />
     </React.Fragment>
