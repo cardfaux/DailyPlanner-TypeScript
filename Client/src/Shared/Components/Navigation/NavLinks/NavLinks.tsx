@@ -27,7 +27,7 @@ const NavLinks: React.FunctionComponent = () => {
       )}
       {auth.isLoggedIn && (
         <ListItem>
-          <NavLink to='/posts/new'>MY CONTACTS</NavLink>
+          <NavLink to='/contacts'>MY CONTACTS</NavLink>
         </ListItem>
       )}
       {!auth.isLoggedIn && (
