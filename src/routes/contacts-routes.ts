@@ -3,15 +3,21 @@ import { check } from 'express-validator';
 
 import checkAuth from '../middleware/check-auth';
 
-import contactsControllers from '../controllers/contacts-controllers';
+import {
+	getMyContacts,
+	getContacts,
+	createMyContacts,
+	updateContactById,
+	deleteContactById
+} from '../controllers/contacts-controllers';
 
 const router = express.Router();
 
-router.get('/', contactsControllers.getContacts);
+router.get('/', getContacts);
 
 router.use(checkAuth);
 
-router.get('/me', contactsControllers.getMyContacts);
+router.get('/me', getMyContacts);
 
 router.post(
 	'/',
@@ -23,7 +29,7 @@ router.post(
 			.normalizeEmail()
 			.isEmail()
 	],
-	contactsControllers.createMyContacts
+	createMyContacts
 );
 
 router.patch(
@@ -36,9 +42,9 @@ router.patch(
 			.normalizeEmail()
 			.isEmail()
 	],
-	contactsControllers.updateContactById
+	updateContactById
 );
 
-router.delete('/:cid', contactsControllers.deleteContactById);
+router.delete('/:cid', deleteContactById);
 
 export default router;

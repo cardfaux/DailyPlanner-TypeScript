@@ -1,4 +1,5 @@
 // Packages
+import { Request, Response, NextFunction } from 'express';
 import { validationResult } from 'express-validator';
 import mongoose from 'mongoose';
 
@@ -14,7 +15,11 @@ import Event from '../models/event-model';
 // @type -- GET
 // @path -- /api/events
 // @desc -- path to get all the events
-export const getEvents = async (req, res, next) => {
+export const getEvents = async (
+	req: Request,
+	res: Response,
+	next: NextFunction
+) => {
 	let events;
 
 	try {
@@ -32,8 +37,12 @@ export const getEvents = async (req, res, next) => {
 // @type -- GET
 // @path -- /api/events/me
 // @desc -- path to get user events
-export const getMyEvents = async (req, res, next) => {
-	let userWithEvents;
+export const getMyEvents = async (
+	req: any,
+	res: Response,
+	next: NextFunction
+) => {
+	let userWithEvents: any;
 
 	try {
 		userWithEvents = await User.findById(req.userData.userId).populate(
@@ -49,8 +58,9 @@ export const getMyEvents = async (req, res, next) => {
 	}
 
 	res.json({
-		events: userWithEvents.events.map((event) =>
-			event.toObject({ getters: true })
+		events: userWithEvents.events.map(
+			(event: { toObject: (arg0: { getters: boolean }) => any }) =>
+				event.toObject({ getters: true })
 		)
 	});
 };
@@ -58,7 +68,11 @@ export const getMyEvents = async (req, res, next) => {
 // @type -- POST
 // @path -- /api/events
 // @desc -- path to add events
-export const createMyEvents = async (req, res, next) => {
+export const createMyEvents = async (
+	req: any,
+	res: Response,
+	next: NextFunction
+) => {
 	const errors = validationResult(req);
 	if (!errors.isEmpty()) {
 		// Can Not Use throw Inside Of An Async Function
@@ -71,7 +85,7 @@ export const createMyEvents = async (req, res, next) => {
 	const { title, allDay, start, end, description } = req.body;
 
 	// Build Event Object Instanciate Event Constructor
-	const createdEvent = new Event({
+	const createdEvent: any = new Event({
 		title,
 		allDay,
 		start,
@@ -80,7 +94,7 @@ export const createMyEvents = async (req, res, next) => {
 		creator: req.userData.userId
 	});
 
-	let user;
+	let user: any;
 	try {
 		user = await User.findById(req.userData.userId);
 		console.log(req.userData.userId);
@@ -132,7 +146,11 @@ export const createMyEvents = async (req, res, next) => {
 // @type -- PATCH
 // @path -- /api/events/:eid
 // @desc -- path to update an event by id
-export const updateEventById = async (req, res, next) => {
+export const updateEventById = async (
+	req: any,
+	res: Response,
+	next: NextFunction
+) => {
 	const errors = validationResult(req);
 	if (!errors.isEmpty()) {
 		// Can not Use Throw Inside Of An Async Function
@@ -145,7 +163,7 @@ export const updateEventById = async (req, res, next) => {
 	const { title, allDay, start, end, description } = req.body;
 	const eventId = req.params.eid;
 
-	let event;
+	let event: any;
 	try {
 		event = await Event.findById(eventId);
 	} catch (err) {
@@ -183,10 +201,14 @@ export const updateEventById = async (req, res, next) => {
 // @type -- DELETE
 // @path -- /api/events/:eid
 // @desc -- path to delete an event the id
-export const deleteEventById = async (req, res, next) => {
+export const deleteEventById = async (
+	req: any,
+	res: Response,
+	next: NextFunction
+) => {
 	const eventId = req.params.eid;
 
-	let event;
+	let event: any;
 	try {
 		event = await Event.findById(eventId).populate('creator');
 	} catch (err) {

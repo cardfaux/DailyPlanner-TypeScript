@@ -1,20 +1,25 @@
 // Packages
-const { validationResult } = require('express-validator');
-const mongoose = require('mongoose');
+import { Request, Response, NextFunction } from 'express';
+import { validationResult } from 'express-validator';
+import mongoose from 'mongoose';
 
 // Bring In Error Model
-const HttpError = require('../models/http-error');
+import HttpError from '../models/http-error';
 
 // Bring In The User Model
-const User = require('../models/user-model');
+import User from '../models/user-model';
 
 // Bring In The Event Model
-const Contact = require('../models/contact-model');
+import Contact from '../models/contact-model';
 
 // @type -- GET
 // @path -- /api/contacts
 // @desc -- path to get all the contacts
-const getContacts = async (req, res, next) => {
+export const getContacts = async (
+	req: Request,
+	res: Response,
+	next: NextFunction
+) => {
 	let contacts;
 
 	try {
@@ -32,8 +37,12 @@ const getContacts = async (req, res, next) => {
 // @type -- GET
 // @path -- /api/contacts/me
 // @desc -- path to get user contacts
-const getMyContacts = async (req, res, next) => {
-	let myContacts;
+export const getMyContacts = async (
+	req: any,
+	res: Response,
+	next: NextFunction
+) => {
+	let myContacts: any;
 
 	try {
 		myContacts = await User.findById(req.userData.userId).populate('contacts');
@@ -47,8 +56,9 @@ const getMyContacts = async (req, res, next) => {
 	}
 
 	res.json({
-		contacts: myContacts.contacts.map((contact) =>
-			contact.toObject({ getters: true })
+		contacts: myContacts.contacts.map(
+			(contact: { toObject: (arg0: { getters: boolean }) => any }) =>
+				contact.toObject({ getters: true })
 		)
 	});
 };
@@ -56,7 +66,11 @@ const getMyContacts = async (req, res, next) => {
 // @type -- POST
 // @path -- /api/contacts
 // @desc -- path to add contacts
-const createMyContacts = async (req, res, next) => {
+export const createMyContacts = async (
+	req: any,
+	res: Response,
+	next: NextFunction
+) => {
 	const errors = validationResult(req);
 	if (!errors.isEmpty()) {
 		// Can Not Use throw Inside Of An Async Function
@@ -69,7 +83,7 @@ const createMyContacts = async (req, res, next) => {
 	const { name, email, address, birthday, anniversary } = req.body;
 
 	// Build Contact Object Instanciate Contact Constructor
-	const createdContact = new Contact({
+	const createdContact: any = new Contact({
 		name,
 		email,
 		address,
@@ -78,7 +92,7 @@ const createMyContacts = async (req, res, next) => {
 		creator: req.userData.userId
 	});
 
-	let user;
+	let user: any;
 	try {
 		user = await User.findById(req.userData.userId);
 	} catch (err) {
@@ -127,7 +141,11 @@ const createMyContacts = async (req, res, next) => {
 // @type -- PATCH
 // @path -- /api/contacts/:cid
 // @desc -- path to update a contact by id
-const updateContactById = async (req, res, next) => {
+export const updateContactById = async (
+	req: any,
+	res: Response,
+	next: NextFunction
+) => {
 	const errors = validationResult(req);
 	if (!errors.isEmpty()) {
 		// Can not Use Throw Inside Of An Async Function
@@ -140,7 +158,7 @@ const updateContactById = async (req, res, next) => {
 	const { name, email, address, birthday, anniversary } = req.body;
 	const contactId = req.params.cid;
 
-	let contact;
+	let contact: any;
 	try {
 		contact = await Contact.findById(contactId);
 	} catch (err) {
@@ -178,10 +196,14 @@ const updateContactById = async (req, res, next) => {
 // @type -- DELETE
 // @path -- /api/contacts/:cid
 // @desc -- path to delete a contact by the id
-const deleteContactById = async (req, res, next) => {
+export const deleteContactById = async (
+	req: any,
+	res: Response,
+	next: NextFunction
+) => {
 	const contactId = req.params.cid;
 
-	let contact;
+	let contact: any;
 	try {
 		contact = await Contact.findById(contactId).populate('creator');
 	} catch (err) {
@@ -222,9 +244,3 @@ const deleteContactById = async (req, res, next) => {
 	}
 	res.status(200).json({ message: 'Deleted Contact Successfully!' });
 };
-
-exports.getContacts = getContacts;
-exports.getMyContacts = getMyContacts;
-exports.createMyContacts = createMyContacts;
-exports.updateContactById = updateContactById;
-exports.deleteContactById = deleteContactById;

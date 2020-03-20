@@ -1,4 +1,5 @@
 // Packages
+import { Request, Response, NextFunction } from 'express';
 import { validationResult } from 'express-validator';
 import bcrypt from 'bcryptjs';
 import jwt from 'jsonwebtoken';
@@ -12,7 +13,11 @@ import User from '../models/user-model';
 // @type -- GET
 // @path -- /api/users
 // @desc -- path to get all the users
-export const getUsers = async (req, res, next) => {
+export const getUsers = async (
+	req: Request,
+	res: Response,
+	next: NextFunction
+) => {
 	let users;
 
 	try {
@@ -28,8 +33,12 @@ export const getUsers = async (req, res, next) => {
 // @type -- GET
 // @path -- /api/users/myData
 // @desc -- path to get all the users
-export const getMyData = async (req, res, next) => {
-	let userData;
+export const getMyData = async (
+	req: any,
+	res: Response,
+	next: NextFunction
+) => {
+	let userData: any;
 
 	try {
 		userData = await User.findById(req.userData.userId).select('-password');
@@ -45,7 +54,11 @@ export const getMyData = async (req, res, next) => {
 // @type -- POST
 // @path -- /api/users/signup
 // @desc -- path to register a new user
-export const signup = async (req, res, next) => {
+export const signup = async (
+	req: Request,
+	res: Response,
+	next: NextFunction
+) => {
 	const errors = validationResult(req);
 	if (!errors.isEmpty()) {
 		// Can Not Use throw Inside Of An Async Function
@@ -83,7 +96,7 @@ export const signup = async (req, res, next) => {
 	}
 
 	// New Instance Of The User Class
-	const createdUser = new User({
+	const createdUser: any = new User({
 		name,
 		email,
 		image: req.file.path,
@@ -137,10 +150,14 @@ export const signup = async (req, res, next) => {
 // @type -- POST
 // @path -- /api/users/login
 // @desc -- path to login a user
-export const login = async (req, res, next) => {
+export const login = async (
+	req: Request,
+	res: Response,
+	next: NextFunction
+) => {
 	const { email, password } = req.body;
 
-	let existingUser;
+	let existingUser: any;
 	try {
 		existingUser = await User.findOne({ email: email });
 	} catch (err) {

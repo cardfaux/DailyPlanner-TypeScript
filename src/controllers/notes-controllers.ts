@@ -1,4 +1,5 @@
 // Packages
+import { Request, Response, NextFunction } from 'express';
 import { validationResult } from 'express-validator';
 import mongoose from 'mongoose';
 
@@ -15,7 +16,11 @@ import Note from '../models/note-model';
 // @path -- /api/notes
 // @desc -- path to get all notes
 // @aces -- PUBLIC
-export const getNotes = async (req, res, next) => {
+export const getNotes = async (
+	req: Request,
+	res: Response,
+	next: NextFunction
+) => {
 	let notes;
 
 	try {
@@ -34,8 +39,12 @@ export const getNotes = async (req, res, next) => {
 // @path -- /api/notes/me
 // @desc -- path to get users notes
 // @aces -- PRIVATE
-export const getMyNotes = async (req, res, next) => {
-	let myNotes;
+export const getMyNotes = async (
+	req: any,
+	res: Response,
+	next: NextFunction
+) => {
+	let myNotes: any;
 
 	try {
 		myNotes = await User.findById(req.userData.userId).populate('notes');
@@ -49,7 +58,10 @@ export const getMyNotes = async (req, res, next) => {
 	}
 
 	res.json({
-		notes: myNotes.notes.map((note) => note.toObject({ getters: true }))
+		notes: myNotes.notes.map(
+			(note: { toObject: (arg0: { getters: boolean }) => any }) =>
+				note.toObject({ getters: true })
+		)
 	});
 };
 
@@ -57,10 +69,14 @@ export const getMyNotes = async (req, res, next) => {
 // @path -- /api/notes/:nid
 // @desc -- path to get a note by its id
 // @aces -- PRIVATE
-export const getNoteById = async (req, res, next) => {
+export const getNoteById = async (
+	req: Request,
+	res: Response,
+	next: NextFunction
+) => {
 	const noteId = req.params.nid;
 
-	let note;
+	let note: any;
 	try {
 		note = await Note.findById(noteId);
 	} catch (err) {
@@ -92,7 +108,7 @@ export const getNoteById = async (req, res, next) => {
 // @path -- /api/notes
 // @desc -- path to create notes
 // @aces -- PRIVATE
-export const createANewNote = async (req, res, next) => {
+export const createANewNote = async (req: any, res: any, next: any) => {
 	const errors = validationResult(req);
 	if (!errors.isEmpty()) {
 		// Can Not Use throw Inside Of An Async Function
@@ -111,7 +127,7 @@ export const createANewNote = async (req, res, next) => {
 		creator: req.userData.userId
 	});
 
-	let user;
+	let user: any;
 	try {
 		user = await User.findById(req.userData.userId);
 	} catch (err) {
@@ -161,7 +177,7 @@ export const createANewNote = async (req, res, next) => {
 // @path -- /api/notes/:nid
 // @desc -- path to update a note by id
 // @aces -- PRIVATE
-export const updateNoteById = async (req, res, next) => {
+export const updateNoteById = async (req: any, res: any, next: any) => {
 	const errors = validationResult(req);
 	if (!errors.isEmpty()) {
 		// Can not Use Throw Inside Of An Async Function
@@ -174,7 +190,7 @@ export const updateNoteById = async (req, res, next) => {
 	const { title, description } = req.body;
 	const noteId = req.params.nid;
 
-	let note;
+	let note: any;
 	try {
 		note = await Note.findById(noteId);
 	} catch (err) {
@@ -213,10 +229,10 @@ export const updateNoteById = async (req, res, next) => {
 // @path -- /api/notes/:nid
 // @desc -- path to delete a note by the id
 // @aces -- PRIVATE
-export const deleteNoteById = async (req, res, next) => {
+export const deleteNoteById = async (req: any, res: any, next: any) => {
 	const noteId = req.params.nid;
 
-	let note;
+	let note: any;
 	try {
 		note = await Note.findById(noteId).populate('creator');
 	} catch (err) {
