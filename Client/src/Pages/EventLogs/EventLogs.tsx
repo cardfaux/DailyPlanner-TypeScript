@@ -6,6 +6,8 @@ import LoadingSpinner from '../../Shared/Components/UIElements/LoadingSpinner/Lo
 import { useHttpClient } from '../../Shared/Hooks/Http-Hook';
 import { AuthContext } from '../../Shared/Context/auth-context';
 
+import Pagination from '../../Utils/Pagination';
+
 interface Props {
   events: [any];
 }
@@ -14,6 +16,8 @@ const EventLogs: React.FunctionComponent<Props> = () => {
   const auth = useContext(AuthContext);
   const { isLoading, error, sendRequest, clearError } = useHttpClient();
   const [loadedEventLogs, setLoadedEventLogs] = useState([]);
+  const [currentPage, setCurrentPage] = useState(1);
+  const [eventsPerPage] = useState(1);
 
   useEffect(() => {
     const fetchEventLogs = async () => {
@@ -39,6 +43,15 @@ const EventLogs: React.FunctionComponent<Props> = () => {
     );
   };
 
+  const indexOfLastEvent = currentPage * eventsPerPage;
+  const indexOfFirstEvent = indexOfLastEvent - eventsPerPage;
+  const currentEvents = loadedEventLogs.slice(
+    indexOfFirstEvent,
+    indexOfLastEvent
+  );
+
+  const paginate = (pageNumber: any) => setCurrentPage(pageNumber);
+
   return (
     <React.Fragment>
       <ErrorModal error={error} onClear={clearError} />
@@ -48,10 +61,17 @@ const EventLogs: React.FunctionComponent<Props> = () => {
         </div>
       )}
       {!isLoading && loadedEventLogs && (
-        <MyEventLogs
-          events={loadedEventLogs}
-          onDeleteEvent={eventDeletedHandler}
-        />
+        <React.Fragment>
+          <MyEventLogs
+            events={currentEvents}
+            onDeleteEvent={eventDeletedHandler}
+          />
+          <Pagination
+            itemsPerPage={eventsPerPage}
+            totalItems={loadedEventLogs.length}
+            paginate={paginate}
+          />
+        </React.Fragment>
       )}
     </React.Fragment>
   );

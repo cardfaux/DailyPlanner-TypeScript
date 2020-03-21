@@ -24,7 +24,7 @@ export const getNotes = async (
 	let notes;
 
 	try {
-		notes = await Note.find({});
+		notes = await Note.find({}).sort({ date: -1 });
 	} catch (err) {
 		const error = new HttpError('Fetching Notes Failed', 500);
 		return next(error);
