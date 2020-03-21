@@ -3,6 +3,7 @@ import styled from 'styled-components';
 
 import MyEventsCard from '../../Components/HomePage/MyEventsCard/MyEventsCard';
 import MyNotesCard from '../../Components/HomePage/MyNotesCard/MyNotesCard';
+import MyContactsCard from '../../Components/HomePage/MyContactsCard/MyContactsCard';
 
 interface StyledProps {
   className?: string;
@@ -13,6 +14,7 @@ const HomePage: React.FunctionComponent<StyledProps> = (props) => {
     <div className={props.className}>
       <MyEventsCard />
       <MyNotesCard />
+      <MyContactsCard />
     </div>
   );
 };
