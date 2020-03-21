@@ -6,8 +6,15 @@ import path from 'path';
 
 // Packages
 //const express = require('express');
-import express, { Application, Request, Response, NextFunction } from 'express';
-import mongoose from 'mongoose';
+import express, {
+	Application,
+	RequestHandler,
+	Request,
+	Response,
+	NextFunction,
+	json
+} from 'express';
+import { connect } from 'mongoose';
 // Packages
 
 // Express
@@ -19,15 +26,16 @@ const app: Application = express();
 app.get('/', (req: Request, res: Response) => res.send('API RUNNING'));
 // Test Connection Route
 
-// Define Routes
+// Define Routers
 import { usersRouter } from './routes/users-routes';
 import { eventsRouter } from './routes/events-routes';
 import { notesRouter } from './routes/notes-routes';
 import { contactsRouter } from './routes/contacts-routes';
-import HttpError from './models/http-error';
+// Error Model
+import { HttpError } from './models/http-error';
 
 // BodyParser InIt
-app.use(express.json());
+app.use(json());
 // BodyParser InIt
 
 // Parse The Image Uploads
@@ -35,7 +43,7 @@ app.use('/uploads/images', express.static(path.join('uploads', 'images')));
 // Parse The Image Uploads
 
 // CORS Middleware to attatch to every response
-app.use((req, res, next) => {
+app.use((req: Request, res: Response, next: NextFunction) => {
 	res.setHeader('Access-Control-Allow-Origin', '*');
 	res.setHeader(
 		'Access-Control-Allow-Headers',
@@ -55,14 +63,16 @@ app.use('/api/notes', notesRouter);
 app.use('/api/contacts', contactsRouter);
 
 // Default Error Handling MiddleWare
-app.use((req: Request, res: Response, next: NextFunction) => {
-	const error = new HttpError('Could Not Find This Route!!!', 404);
-	throw error;
-});
+app.use(
+	(req, res, next): RequestHandler => {
+		const error = new HttpError('Could Not Find This Route!!!', 404);
+		throw error;
+	}
+);
 
 // With error As A Parameter Express Knows It's An Error Middleware
 // Will Only Get Executed on Requests That Has An Error Attatched To It, If Any Middleware Before Has An Error
-app.use((error: any, req: Request, res: Response, next: NextFunction) => {
+app.use((error: HttpError, req: Request, res: Response, next: NextFunction) => {
 	// Rollback File Upload If We Get An Error
 	if (req.file) {
 		fs.unlink(req.file.path, (err: any) => {
@@ -83,11 +93,10 @@ app.use((error: any, req: Request, res: Response, next: NextFunction) => {
 
 // Start The Server And Connect To The DataBase
 const PORT: string | number = process.env.PORT || 5000;
-mongoose
-	.connect(
-		`mongodb+srv://${process.env.DB_USER}:${process.env.DB_PASSWORD}@chatterbox-duf9f.mongodb.net/${process.env.DB_NAME}?retryWrites=true&w=majority`,
-		{ useNewUrlParser: true, useUnifiedTopology: true, useCreateIndex: true }
-	)
+connect(
+	`mongodb+srv://${process.env.DB_USER}:${process.env.DB_PASSWORD}@chatterbox-duf9f.mongodb.net/${process.env.DB_NAME}?retryWrites=true&w=majority`,
+	{ useNewUrlParser: true, useUnifiedTopology: true, useCreateIndex: true }
+)
 	.then(() => {
 		app.listen(PORT, () => console.log(`API IS RUNNING ON PORT ${PORT}.....`));
 	})

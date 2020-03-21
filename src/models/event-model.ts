@@ -1,6 +1,4 @@
-import mongoose from 'mongoose';
-
-const Schema = mongoose.Schema;
+import mongoose, { Schema, model } from 'mongoose';
 
 const eventSchema = new Schema({
 	title: { type: String, required: true },
@@ -11,4 +9,4 @@ const eventSchema = new Schema({
 	creator: { type: mongoose.Types.ObjectId, required: true, ref: 'User' }
 });
 
-export default mongoose.model('Event', eventSchema);
+export default model('Event', eventSchema);

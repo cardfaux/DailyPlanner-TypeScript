@@ -1,4 +1,4 @@
-import express from 'express';
+import { Router } from 'express';
 import { check } from 'express-validator';
 
 import checkAuth from '../middleware/check-auth';
@@ -11,7 +11,7 @@ import {
 } from '../controllers/users-controllers';
 import fileUpload from '../middleware/file-upload';
 
-export const usersRouter = express.Router();
+export const usersRouter = Router();
 
 // -----------------Users Routes Starts-----------------------------
 usersRouter.get('/', getUsers);

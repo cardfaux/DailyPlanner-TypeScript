@@ -1,6 +1,4 @@
-import mongoose from 'mongoose';
-
-const Schema = mongoose.Schema;
+import mongoose, { Schema, model } from 'mongoose';
 
 const noteSchema = new Schema({
 	title: { type: String, required: true },
@@ -9,4 +7,4 @@ const noteSchema = new Schema({
 	creator: { type: mongoose.Types.ObjectId, required: true, ref: 'User' }
 });
 
-export default mongoose.model('Note', noteSchema);
+export default model('Note', noteSchema);

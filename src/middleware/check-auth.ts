@@ -1,6 +1,6 @@
-import jwt from 'jsonwebtoken';
+import { verify } from 'jsonwebtoken';
 
-import HttpError from '../models/http-error';
+import { HttpError } from '../models/http-error';
 
 export default (req: any, res: any, next: any) => {
 	if (req.method === 'OPTIONS') {
@@ -11,7 +11,7 @@ export default (req: any, res: any, next: any) => {
 		if (!token) {
 			throw new Error('No Token, Authentication failed!');
 		}
-		const decodedToken: any = jwt.verify(token, `${process.env.JWT_KEY}`);
+		const decodedToken: any = verify(token, `${process.env.JWT_KEY}`);
 		req.userData = { userId: decodedToken.userId };
 		next();
 	} catch (err) {

@@ -1,10 +1,10 @@
 // Packages
-import { Request, Response, NextFunction } from 'express';
+import { Request, Response, NextFunction, RequestHandler } from 'express';
 import { validationResult } from 'express-validator';
 import mongoose from 'mongoose';
 
 // Bring In Error Model
-import HttpError from '../models/http-error';
+import { HttpError } from '../models/http-error';
 
 // Bring In The User Model
 import User from '../models/user-model';
@@ -177,7 +177,7 @@ export const createANewNote = async (req: any, res: any, next: any) => {
 // @path -- /api/notes/:nid
 // @desc -- path to update a note by id
 // @aces -- PRIVATE
-export const updateNoteById = async (req: any, res: any, next: any) => {
+export const updateNoteById: RequestHandler = async (req: any, res, next) => {
 	const errors = validationResult(req);
 	if (!errors.isEmpty()) {
 		// Can not Use Throw Inside Of An Async Function

@@ -1,23 +1,20 @@
 // Packages
-import { Request, Response, NextFunction } from 'express';
+import { RequestHandler } from 'express';
 import { validationResult } from 'express-validator';
 import bcrypt from 'bcryptjs';
 import jwt from 'jsonwebtoken';
 
 // Bring In Error Model
-import HttpError from '../models/http-error';
+import { HttpError } from '../models/http-error';
 
 // Bring In The User Model
 import User from '../models/user-model';
+import { Document } from 'mongoose';
 
 // @type -- GET
 // @path -- /api/users
 // @desc -- path to get all the users
-export const getUsers = async (
-	req: Request,
-	res: Response,
-	next: NextFunction
-) => {
+export const getUsers: RequestHandler = async (req, res, next) => {
 	let users;
 
 	try {
@@ -33,12 +30,8 @@ export const getUsers = async (
 // @type -- GET
 // @path -- /api/users/myData
 // @desc -- path to get all the users
-export const getMyData = async (
-	req: any,
-	res: Response,
-	next: NextFunction
-) => {
-	let userData: any;
+export const getMyData: RequestHandler = async (req: any, res, next) => {
+	let userData: Document | null | any;
 
 	try {
 		userData = await User.findById(req.userData.userId).select('-password');
@@ -48,17 +41,13 @@ export const getMyData = async (
 	}
 
 	//res.json({ user: userData.map((user) => user.toObject({ getters: true })) });
-	res.json({ userData: userData.toObject({ getters: true }) });
+	res.json({ userData: userData!.toObject({ getters: true }) });
 };
 
 // @type -- POST
 // @path -- /api/users/signup
 // @desc -- path to register a new user
-export const signup = async (
-	req: Request,
-	res: Response,
-	next: NextFunction
-) => {
+export const signup: RequestHandler = async (req, res, next) => {
 	const errors = validationResult(req);
 	if (!errors.isEmpty()) {
 		// Can Not Use throw Inside Of An Async Function
@@ -150,11 +139,7 @@ export const signup = async (
 // @type -- POST
 // @path -- /api/users/login
 // @desc -- path to login a user
-export const login = async (
-	req: Request,
-	res: Response,
-	next: NextFunction
-) => {
+export const login: RequestHandler = async (req, res, next) => {
 	const { email, password } = req.body;
 
 	let existingUser: any;

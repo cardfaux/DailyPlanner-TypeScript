@@ -4,7 +4,7 @@ import { validationResult } from 'express-validator';
 import mongoose from 'mongoose';
 
 // Bring In Error Model
-import HttpError from '../models/http-error';
+import { HttpError } from '../models/http-error';
 
 // Bring In The User Model
 import User from '../models/user-model';
