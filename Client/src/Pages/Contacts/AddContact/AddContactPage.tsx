@@ -2,7 +2,7 @@ import React from 'react';
 
 import AddContacts from '../../../Components/Contacts/AddContacts/AddContacts';
 
-const AddContactPage = () => {
+const AddContactPage: React.FunctionComponent = () => {
   return <AddContacts />;
 };
 

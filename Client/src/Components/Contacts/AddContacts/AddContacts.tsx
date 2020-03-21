@@ -63,8 +63,8 @@ const AddContact: React.FunctionComponent<NotesProps> = (props) => {
         `${process.env.REACT_APP_BACKEND_URL}/contacts`,
         'POST',
         JSON.stringify({
-          name: formState.inputs.title.value,
-          email: formState.inputs.description.value,
+          name: formState.inputs.name.value,
+          email: formState.inputs.email.value,
           address: formState.inputs.address.value,
           birthday: formState.inputs.birthday.value
         }),
@@ -123,7 +123,7 @@ const AddContact: React.FunctionComponent<NotesProps> = (props) => {
           onInput={inputHandler}
         />
         <Button type='submit' disabled={!formState.isValid}>
-          ADD NOTE
+          ADD CONTACT
         </Button>
       </form>
       {/* </div> */}
