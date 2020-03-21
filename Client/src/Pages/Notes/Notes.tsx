@@ -6,6 +6,8 @@ import LoadingSpinner from '../../Shared/Components/UIElements/LoadingSpinner/Lo
 import { useHttpClient } from '../../Shared/Hooks/Http-Hook';
 import { AuthContext } from '../../Shared/Context/auth-context';
 
+import Pagination from '../../Utils/Pagination';
+
 interface Props {
   notes: [any];
 }
@@ -14,6 +16,8 @@ const Notes: React.FunctionComponent<Props> = () => {
   const auth = useContext(AuthContext);
   const { isLoading, error, sendRequest, clearError } = useHttpClient();
   const [loadedNotes, setLoadedNotes] = useState([]);
+  const [currentPage, setCurrentPage] = useState(1);
+  const [notesPerPage] = useState(1);
 
   useEffect(() => {
     const fetchNotes = async () => {
@@ -39,6 +43,12 @@ const Notes: React.FunctionComponent<Props> = () => {
     );
   };
 
+  const indexOfLastNote = currentPage * notesPerPage;
+  const indexOfFirstNote = indexOfLastNote - notesPerPage;
+  const currentNotes = loadedNotes.slice(indexOfFirstNote, indexOfLastNote);
+
+  const paginate = (pageNumber: any) => setCurrentPage(pageNumber);
+
   return (
     <React.Fragment>
       <ErrorModal error={error} onClear={clearError} />
@@ -48,7 +58,14 @@ const Notes: React.FunctionComponent<Props> = () => {
         </div>
       )}
       {!isLoading && loadedNotes && (
-        <MyNotes notes={loadedNotes} onDeleteNote={noteDeletedHandler} />
+        <React.Fragment>
+          <MyNotes notes={currentNotes} onDeleteNote={noteDeletedHandler} />
+          <Pagination
+            itemsPerPage={notesPerPage}
+            totalItems={loadedNotes.length}
+            paginate={paginate}
+          />
+        </React.Fragment>
       )}
     </React.Fragment>
   );
