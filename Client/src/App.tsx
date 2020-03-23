@@ -17,6 +17,7 @@ import AddNote from './Pages/Notes/AddNote/AddNote';
 import EditNote from './Pages/Notes/EditNote/EditNotePage';
 import Contacts from './Pages/Contacts/Contacts';
 import AddContact from './Pages/Contacts/AddContact/AddContactPage';
+import EditContact from './Pages/Contacts/EditContact/EditContactPage';
 import Auth from './Pages/Authenticate/Auth';
 import MainNavigation from './Shared/Components/Navigation/MainNavigation/MainNavigation';
 import { AuthContext } from './Shared/Context/auth-context';
@@ -42,6 +43,7 @@ const App: React.FunctionComponent = () => {
         <Route path='/note/edit/:noteId' exact component={EditNote} />
         <Route path='/contacts' exact component={Contacts} />
         <Route path='/add/contact' exact component={AddContact} />
+        <Route path='/contact/edit/:contactId' exact component={EditContact} />
         <Redirect to='/' />
       </Switch>
     );

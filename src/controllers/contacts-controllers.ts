@@ -63,6 +63,45 @@ export const getMyContacts = async (
 	});
 };
 
+// @type -- GET
+// @path -- /api/contacts/:cid
+// @desc -- path to get a contact by its id
+// @aces -- PRIVATE
+export const getContactById = async (
+	req: Request,
+	res: Response,
+	next: NextFunction
+) => {
+	const contactId = req.params.cid;
+
+	let contact: any;
+	try {
+		contact = await Contact.findById(contactId);
+	} catch (err) {
+		const error = new HttpError(
+			'Something Went Wrong, Could Not Find Contact',
+			500
+		);
+		return next(error);
+	}
+
+	if (!contact || contact.length === 0) {
+		const error = new HttpError(
+			'Could Not Find A Contact For The Provided ID',
+			404
+		);
+		return next(error);
+	}
+
+	// Turns The Place Object Into A Normal JavaScript Object
+	// Getters: True Turns The Mongoose Model _id to id
+	res.json({
+		contact: contact.toObject({
+			getters: true
+		})
+	});
+};
+
 // @type -- POST
 // @path -- /api/contacts
 // @desc -- path to add contacts

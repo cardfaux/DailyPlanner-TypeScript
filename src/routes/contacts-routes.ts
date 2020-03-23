@@ -6,6 +6,7 @@ import checkAuth from '../middleware/check-auth';
 import {
 	getMyContacts,
 	getContacts,
+	getContactById,
 	createMyContacts,
 	updateContactById,
 	deleteContactById
@@ -18,6 +19,8 @@ contactsRouter.get('/', getContacts);
 contactsRouter.use(checkAuth);
 
 contactsRouter.get('/me', getMyContacts);
+
+contactsRouter.get('/:cid', getContactById);
 
 contactsRouter.post(
 	'/',
