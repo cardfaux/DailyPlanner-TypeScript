@@ -32,7 +32,7 @@ export const ListItem = styled.li`
       color: ${Black};
     }
   }
-  @media (min-width: 768px) {
+  @media (min-width: 850px) {
     margin: 0 0.5rem;
     > a {
       color: ${White};
@@ -56,7 +56,7 @@ export const Button = styled.button`
     background: ${Black};
     color: white;
   }
-  @media (min-width: 768px) {
+  @media (min-width: 850px) {
     border: 1px solid ${White};
     color: ${White};
     background: transparent;

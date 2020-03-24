@@ -1,18 +1,14 @@
 import styled from 'styled-components';
 
-import {
-  Primary,
-  Secondary,
-  White,
-  OffWhite
-} from '../../../../Styles/JS/Colors';
+import { Primary, White, OffWhite } from '../../../../Styles/JS/Colors';
 
 export const ModalContainer = styled.div`
   z-index: 100;
   position: fixed;
-  top: 22vh;
-  left: 10%;
-  width: 80%;
+  top: 10vh;
+  width: 95%;
+  left: 2vw;
+  margin: 0 auto;
   background: ${OffWhite};
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.26);
   border-radius: 8px;

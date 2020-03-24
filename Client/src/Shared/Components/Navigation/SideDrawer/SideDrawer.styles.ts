@@ -4,10 +4,11 @@ import { CSSTransition } from 'react-transition-group';
 
 import { White } from '../../../../Styles/JS/Colors';
 import { BoxShadow2 } from '../../../../Styles/JS/Shadows';
-import { Fixed } from '../../../../Styles/JS/Positions';
 
 export const Aside = styled.aside`
-  ${Fixed};
+  position: fixed;
+  top: 0;
+  left: 0;
   z-index: 100;
   height: 100vh;
   width: 70%;

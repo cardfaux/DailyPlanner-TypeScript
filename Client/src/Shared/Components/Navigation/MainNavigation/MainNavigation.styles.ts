@@ -18,7 +18,7 @@ export const Hamburger = styled.button`
     height: 2.5px;
     background: ${White};
   }
-  @media (min-width: 768px) {
+  @media (min-width: 850px) {
     display: none;
   }
 `;
@@ -33,7 +33,7 @@ export const Title = styled.h1`
 
 export const Nav = styled.nav`
   display: none;
-  @media (min-width: 768px) {
+  @media (min-width: 850px) {
     display: block;
   }
 `;
