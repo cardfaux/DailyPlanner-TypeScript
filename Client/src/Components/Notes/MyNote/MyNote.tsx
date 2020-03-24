@@ -91,11 +91,11 @@ const MyNote: React.FunctionComponent<NoteProps> = (props) => {
           {isLoading && <LoadingSpinner asOverlay />}
           <div className='header'>
             <header>
-              <h1>{props.title}</h1>
-              <h3>{auth.userName}</h3>
-              <h4>
+              <h2>{props.title}</h2>
+              {/* <h3>{auth.userName}</h3> */}
+              <h6>
                 <Moment format='YYYY/MM/DD'>{moment.utc(props.date)}</Moment>
-              </h4>
+              </h6>
             </header>
           </div>
 
@@ -117,8 +117,7 @@ const MyNote: React.FunctionComponent<NoteProps> = (props) => {
 export default styled(MyNote)`
   text-align: center;
   list-style: none;
-  max-width: 50%;
-  min-width: 40rem;
+  width: 95%;
   margin: auto;
   .header {
     background: ${Secondary};
@@ -140,8 +139,11 @@ const StyledCard = styled(Card)`
   margin-bottom: 3rem;
 `;
 const Description = styled.div`
-  padding: 2rem;
+  padding: 1rem 1.5rem;
   background: ${OffWhite};
+  font-size: 0.75rem;
+  @media (min-width: 368px) {
+  }
 `;
 
 const Footer = styled.footer`

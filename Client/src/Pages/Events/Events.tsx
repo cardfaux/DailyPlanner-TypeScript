@@ -23,6 +23,6 @@ const StyledDiv = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
-  margin: 0;
+  margin-top: 5rem;
   padding: 0;
 `;

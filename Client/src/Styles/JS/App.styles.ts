@@ -2,7 +2,10 @@ import styled, { createGlobalStyle } from 'styled-components';
 import { Primary } from './Colors';
 
 export const Main = styled.main`
-  margin-top: 5rem;
+  margin-top: 3.5rem;
+  @media (min-width: 368px) {
+    margin-top: 5rem;
+  }
 `;
 
 export const GlobalStyle = createGlobalStyle`

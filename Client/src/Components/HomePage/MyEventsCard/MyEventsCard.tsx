@@ -66,8 +66,8 @@ const MyEventsCard: React.FunctionComponent<StyledProps> = ({ className }) => {
 };
 
 export default styled(MyEventsCard)`
-  margin: 4rem;
-  width: 30rem;
+  margin: 2rem 1rem;
+  width: 95%;
   text-align: center;
 
   a {
@@ -93,5 +93,7 @@ export default styled(MyEventsCard)`
     > div a {
       margin-right: 0;
     }
+  }
+  @media (min-width: 368px) {
   }
 `;

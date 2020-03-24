@@ -52,7 +52,10 @@ const MyContacts: React.FunctionComponent<Props> = (props) => {
 };
 
 export default styled(MyContacts)`
-  margin-top: 10rem;
+  margin-top: 6rem;
+  padding: 0;
+  @media (min-width: 368px) {
+  }
 `;
 const StyledCard = styled(Card)`
   max-width: 50rem;

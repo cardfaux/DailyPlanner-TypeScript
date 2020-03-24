@@ -147,11 +147,13 @@ const AddContact: React.FunctionComponent<NotesProps> = (props) => {
 
 export default styled(AddContact)`
   list-style: none;
-  margin: 10rem auto;
+  margin: 6rem auto;
   padding: 1rem;
   width: 90%;
   max-width: 40rem;
   box-shadow: ${BoxShadow2};
   border-radius: 6px;
   background: ${White};
+  @media (min-width: 368px) {
+  }
 `;

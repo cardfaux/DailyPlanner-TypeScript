@@ -68,8 +68,8 @@ const MyContactsCard: React.FunctionComponent<StyledProps> = ({
 };
 
 export default styled(MyContactsCard)`
-  margin: 4rem;
-  width: 30rem;
+  margin: 2rem 1rem;
+  width: 95%;
   text-align: center;
 
   a {
@@ -95,5 +95,7 @@ export default styled(MyContactsCard)`
     > div a {
       margin-right: 0;
     }
+  }
+  @media (min-width: 368px) {
   }
 `;

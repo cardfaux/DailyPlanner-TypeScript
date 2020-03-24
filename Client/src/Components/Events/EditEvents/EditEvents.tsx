@@ -207,11 +207,13 @@ const EditEvents: React.FunctionComponent<EditProps> = (props) => {
 
 export default styled(EditEvents)`
   list-style: none;
-  margin: 0 auto;
+  margin: 6rem auto;
   padding: 1rem;
   width: 90%;
   max-width: 40rem;
   box-shadow: ${BoxShadow2};
   border-radius: 6px;
   background: ${White};
+  @media (min-width: 368px) {
+  }
 `;
