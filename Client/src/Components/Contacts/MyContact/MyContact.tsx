@@ -143,7 +143,18 @@ export default styled(MyContact)`
       flex-direction: row;
       justify-content: space-around;
       align-items: center;
+      @media (min-width: 850px) {
+        > h2 {
+          font-size: 2rem;
+        }
+        > h6 {
+          font-size: 1rem;
+        }
+      }
     }
+  }
+  @media (min-width: 850px) {
+    max-width: 45rem;
   }
 `;
 const StyledCard = styled(Card)`
@@ -155,7 +166,8 @@ const Description = styled.div`
   padding: 1rem 1.5rem;
   background: ${OffWhite};
   font-size: 0.75rem;
-  @media (min-width: 368px) {
+  @media (min-width: 850px) {
+    font-size: inherit;
   }
 `;
 

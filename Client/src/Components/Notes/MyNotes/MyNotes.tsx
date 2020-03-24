@@ -50,7 +50,7 @@ const MyNotes: React.FunctionComponent<Props> = (props) => {
 export default styled(MyNotes)`
   margin-top: 6rem;
   padding: 0;
-  @media (min-width: 368px) {
+  @media (min-width: 850px) {
   }
 `;
 const StyledCard = styled(Card)`

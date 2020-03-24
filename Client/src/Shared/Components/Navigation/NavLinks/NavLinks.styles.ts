@@ -12,7 +12,7 @@ export const Navigation = styled.ul`
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  @media (min-width: 768px) {
+  @media (min-width: 850px) {
     flex-direction: row;
   }
 `;

@@ -94,6 +94,7 @@ export default styled(MyEventsCard)`
       margin-right: 0;
     }
   }
-  @media (min-width: 368px) {
+  @media (min-width: 850px) {
+    max-width: 35rem;
   }
 `;
