@@ -33,6 +33,7 @@ const MyContacts: React.FunctionComponent<Props> = (props) => {
           email: string;
           address: string;
           birthday: string;
+          anniversary: string;
         }) => (
           <MyContact
             key={contact.id}
@@ -40,6 +41,7 @@ const MyContacts: React.FunctionComponent<Props> = (props) => {
             email={contact.email}
             address={contact.address}
             birthday={contact.birthday}
+            anniversary={contact.anniversary}
             id={contact.id}
             onDelete={props.onDeleteNote}
           />

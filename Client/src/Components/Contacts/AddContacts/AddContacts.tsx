@@ -46,6 +46,10 @@ const AddContact: React.FunctionComponent<NotesProps> = (props) => {
       birthday: {
         value: '',
         isValid: false
+      },
+      anniversary: {
+        value: '',
+        isValid: false
       }
     },
     false
@@ -66,7 +70,8 @@ const AddContact: React.FunctionComponent<NotesProps> = (props) => {
           name: formState.inputs.name.value,
           email: formState.inputs.email.value,
           address: formState.inputs.address.value,
-          birthday: formState.inputs.birthday.value
+          birthday: formState.inputs.birthday.value,
+          anniversary: formState.inputs.anniversary.value
         }),
         {
           'Content-Type': 'application/json',
@@ -120,6 +125,15 @@ const AddContact: React.FunctionComponent<NotesProps> = (props) => {
           type='text'
           validators={[VALIDATOR_MAXLENGTH(60)]}
           errorText='Please enter a valid Birthday.'
+          onInput={inputHandler}
+        />
+        <Input
+          id='anniversary'
+          element='input'
+          label='Anniversary'
+          type='text'
+          validators={[VALIDATOR_MAXLENGTH(60)]}
+          errorText='Please enter a valid Anniversary.'
           onInput={inputHandler}
         />
         <Button type='submit' disabled={!formState.isValid}>

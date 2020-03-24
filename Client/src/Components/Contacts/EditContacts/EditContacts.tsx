@@ -51,6 +51,10 @@ const EditContacts: React.FunctionComponent<EditProps> = (props) => {
       birthday: {
         value: '',
         isValid: false
+      },
+      anniversary: {
+        value: '',
+        isValid: false
       }
     },
     false
@@ -85,6 +89,10 @@ const EditContacts: React.FunctionComponent<EditProps> = (props) => {
             birthday: {
               value: responseData.contact.birthday,
               isValid: true
+            },
+            anniversary: {
+              value: responseData.contact.anniversary,
+              isValid: true
             }
           },
           true
@@ -106,7 +114,8 @@ const EditContacts: React.FunctionComponent<EditProps> = (props) => {
           name: formState.inputs.name.value,
           email: formState.inputs.email.value,
           address: formState.inputs.address.value,
-          birthday: formState.inputs.birthday.value
+          birthday: formState.inputs.birthday.value,
+          anniversary: formState.inputs.anniversary.value
         }),
         {
           'Content-Type': 'application/json',
@@ -186,6 +195,17 @@ const EditContacts: React.FunctionComponent<EditProps> = (props) => {
             errorText='Please enter a valid birthday.'
             onInput={inputHandler}
             initialValue={loadedContact.birthday}
+            initialValid={true}
+          />
+          <Input
+            id='anniversary'
+            element='input'
+            label='Anniversary'
+            type='text'
+            validators={[VALIDATOR_MAXLENGTH(60)]}
+            errorText='Please enter a valid Anniversary.'
+            onInput={inputHandler}
+            initialValue={loadedContact.anniversary}
             initialValid={true}
           />
           <Button type='submit' disabled={!formState.isValid}>

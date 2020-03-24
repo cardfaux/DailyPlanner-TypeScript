@@ -23,6 +23,7 @@ interface NoteProps {
   email: string;
   address: string;
   birthday: string;
+  anniversary: string;
 }
 
 const MyContact: React.FunctionComponent<NoteProps> = (props) => {
@@ -104,6 +105,11 @@ const MyContact: React.FunctionComponent<NoteProps> = (props) => {
             <h4>
               <Moment format='MMMM/DD/YYYY'>
                 {moment.utc(props.birthday)}
+              </Moment>
+            </h4>
+            <h4>
+              <Moment format='MMMM/DD/YYYY'>
+                {moment.utc(props.anniversary)}
               </Moment>
             </h4>
           </Description>
