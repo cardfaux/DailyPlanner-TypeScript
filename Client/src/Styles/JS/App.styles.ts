@@ -1,5 +1,5 @@
 import styled, { createGlobalStyle } from 'styled-components';
-import { Primary, SonicSilver } from './Colors';
+import { Primary, SonicSilver, Secondary } from './Colors';
 
 export const Main = styled.main`
   margin-top: 4.5rem;
@@ -99,4 +99,15 @@ export const GlobalStyle = createGlobalStyle`
 	text-align: center;
 	background: ${Primary};
 }
+
+.rbc-today {
+	background-color: ${Secondary}
+}
+
+.rbc-toolbar-label {
+	color: ${Secondary};
+	font-size: x-large;
+	font-weight: bolder;
+}
+
 `;

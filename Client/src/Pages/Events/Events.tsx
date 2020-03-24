@@ -4,13 +4,15 @@ import styled from 'styled-components';
 import Calendar from '../../Components/Calendar/Calendar';
 import Button from '../../Shared/Components/FormElements/Button/Button';
 
+import { Secondary } from '../../Styles/JS/Colors';
+
 const Events: React.FunctionComponent = () => {
   return (
     <React.Fragment>
       <StyledDiv>
-        <Button inverse to='/events/logs'>
+        <StyledButton inverse to='/events/logs'>
           Go To Event Logs
-        </Button>
+        </StyledButton>
       </StyledDiv>
       <Calendar />
     </React.Fragment>
@@ -24,5 +26,16 @@ const StyledDiv = styled.div`
   justify-content: center;
   align-items: center;
   margin-top: 5rem;
-  padding: 0;
+  padding: 0.5rem 0;
+`;
+const StyledButton = styled(Button)`
+  .button {
+    border: 1px solid ${Secondary};
+    color: ${Secondary};
+    &:hover {
+      background: ${Secondary};
+      color: black;
+      border: 1px solid ${Secondary};
+    }
+  }
 `;
