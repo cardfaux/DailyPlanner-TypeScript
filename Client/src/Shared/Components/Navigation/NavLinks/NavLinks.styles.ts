@@ -4,13 +4,13 @@ import { Black, White, Secondary } from '../../../../Styles/JS/Colors';
 
 export const Navigation = styled.ul`
   list-style: none;
-  margin: 0;
+  margin: 4rem 0;
   padding: 0;
   width: 100%;
   height: 100%;
   display: flex;
   flex-direction: column;
-  justify-content: center;
+  justify-content: start;
   align-items: center;
   @media (min-width: 850px) {
     flex-direction: row;

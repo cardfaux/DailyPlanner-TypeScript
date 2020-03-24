@@ -1,9 +1,9 @@
 import styled, { createGlobalStyle } from 'styled-components';
-import { Primary } from './Colors';
+import { Primary, SonicSilver } from './Colors';
 
 export const Main = styled.main`
-  margin-top: 3.5rem;
-  @media (min-width: 368px) {
+  margin-top: 4.5rem;
+  @media (min-width: 850px) {
     margin-top: 5rem;
   }
 `;
@@ -12,6 +12,7 @@ export const GlobalStyle = createGlobalStyle`
   body {
 		padding: 0;
     margin: 0;
+		background: ${SonicSilver};
     font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
 	}
 	html {

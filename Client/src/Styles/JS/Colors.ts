@@ -11,6 +11,11 @@ export const textSecondary: string = '#ececec';
 export const bgPrimary: string = '#23232e';
 export const bgSecondary: string = '#141418';
 
+export const GrayBlue: string = '#8d99ae';
+export const HoneyDew: string = '#eff6ee';
+export const SonicSilver: string = '#757780';
+export const LightGray: string = '#cccdd0';
+
 // Blacks
 export const eerieBlack: string = '#1a181b';
 export const liccorice: string = '#141115';
