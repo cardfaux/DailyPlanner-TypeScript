@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import styled from 'styled-components';
 
 import { SonicSilver } from '../../Styles/JS/Colors';
@@ -8,6 +8,52 @@ interface Props {
 }
 
 const RawCalendar: React.FunctionComponent<Props> = (props) => {
+  let date = new Date();
+  let day = date.getDate();
+  let month = date.getMonth();
+  let year = date.getFullYear();
+
+  let selectedDate = date;
+  let selectedDay = day;
+  let selectedMonth = month;
+  let selectedYear = year;
+
+  const [thisMonth, setThisMonth] = useState(date.getMonth());
+  const [thisYear, setThisYear] = useState(date.getFullYear());
+
+  const months = [
+    'January',
+    'February',
+    'March',
+    'April',
+    'May',
+    'June',
+    'July',
+    'August',
+    'September',
+    'October',
+    'November',
+    'December'
+  ];
+
+  const goToNextMonth = () => {
+    if (thisMonth < 11) {
+      setThisMonth(thisMonth + 1);
+    }
+    if (thisMonth >= 11) {
+      setThisMonth(0);
+      setThisYear(thisYear + 1);
+    }
+  };
+
+  const goToPreviousMonth = () => {
+    setThisMonth(thisMonth - 1);
+    if (thisMonth <= 0) {
+      setThisMonth(11);
+      setThisYear(thisYear - 1);
+    }
+  };
+
   return (
     <div className={props.className}>
       <div className='date-picker'>
@@ -15,9 +61,14 @@ const RawCalendar: React.FunctionComponent<Props> = (props) => {
 
         <div className='dates'>
           <div className='month'>
-            <div className='arrows prev-month'>&lt;</div>
-            <div className='mth'>March 2020</div>
-            <div className='arrows next-month'>&gt;</div>
+            <div onClick={goToPreviousMonth} className='arrows prev-month'>
+              &lt;
+            </div>
+            {/* <div className='mth'>{months[month] + ' ' + year}</div> */}
+            <div className='mth'>{months[thisMonth] + ' ' + thisYear}</div>
+            <div onClick={goToNextMonth} className='arrows next-month'>
+              &gt;
+            </div>
           </div>
 
           <div className='days'></div>
