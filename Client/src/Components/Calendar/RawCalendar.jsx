@@ -1,13 +1,9 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import styled from 'styled-components';
 
 import { SonicSilver } from '../../Styles/JS/Colors';
 
-interface Props {
-  className?: string;
-}
-
-const RawCalendar: React.FunctionComponent<Props> = (props) => {
+const RawCalendar = (props) => {
   let date = new Date();
   let day = date.getDate();
   let month = date.getMonth();
@@ -18,12 +14,11 @@ const RawCalendar: React.FunctionComponent<Props> = (props) => {
   let selectedMonth = month;
   let selectedYear = year;
 
-  const [thisMonth, setThisMonth] = useState(date.getMonth());
-  const [thisYear, setThisYear] = useState(date.getFullYear());
+  const [thisMonth, setThisMonth] = useState(month);
+  const [thisYear, setThisYear] = useState(year);
   // const [thisDay, setThisDay] = useState(date.getDate());
   const [thisDay, setThisDay] = useState([]);
-
-  const months = [
+  const [allMonths, setAMonth] = useState([
     'January',
     'February',
     'March',
@@ -36,11 +31,13 @@ const RawCalendar: React.FunctionComponent<Props> = (props) => {
     'October',
     'November',
     'December'
-  ];
+  ]);
 
   const goToNextMonth = () => {
+    console.log(allMonths);
+    console.log(thisMonth);
     if (thisMonth < 11) {
-      setThisMonth(thisMonth + 1);
+      setThisMonth((currentMonth) => currentMonth + 1);
     }
     if (thisMonth >= 11) {
       setThisMonth(0);
@@ -58,7 +55,7 @@ const RawCalendar: React.FunctionComponent<Props> = (props) => {
     populateDates();
   };
 
-  const formatDate = (date: any) => {
+  const formatDate = (date) => {
     let day = date.getDate();
     if (day < 10) {
       day = '0' + day;
@@ -73,28 +70,26 @@ const RawCalendar: React.FunctionComponent<Props> = (props) => {
   };
 
   const populateDates = () => {
-    setThisDay([]);
-
-    let amountOfDays = 31 + 1;
-    if (thisMonth === 2) {
-      amountOfDays = 28;
-    }
+    let amountOfDays = 31;
 
     let dateArray = [];
-    for (let i = 1; i < amountOfDays; i++) {
-      //console.log(thisMonth, amountOfDays);
+    for (let i = 1; i <= amountOfDays; i++) {
       dateArray.push(i);
-      //setThisDay(i + 1);
-      //console.log(dateArray);
     }
-    console.log(dateArray);
+
     setThisDay(dateArray);
-    let newDate = dateArray.map(function(number) {
-      return number;
-    });
-    console.log('MAPPED DATES', newDate);
-    console.log('THIS DAY', thisDay);
   };
+
+  useEffect(() => {
+    setThisMonth(thisMonth);
+    populateDates();
+  }, [setThisDay]);
+
+  let mappedDate = (day) => (
+    <div key={day} className='day'>
+      {day}
+    </div>
+  );
 
   return (
     <div className={props.className}>
@@ -106,21 +101,14 @@ const RawCalendar: React.FunctionComponent<Props> = (props) => {
             <div onClick={goToPreviousMonth} className='arrows prev-month'>
               &lt;
             </div>
-            {/* <div className='mth'>{months[month] + ' ' + year}</div> */}
-            <div className='mth'>{months[thisMonth] + ' ' + thisYear}</div>
+
+            <div className='mth'>{allMonths[thisMonth] + ' ' + thisYear}</div>
             <div onClick={goToNextMonth} className='arrows next-month'>
               &gt;
             </div>
           </div>
 
-          <div className='days'>
-            {thisDay.map((day) => (
-              <div className='day'>{day}</div>
-            ))}
-            {/* <div className='day'>
-              
-            </div> */}
-          </div>
+          <div className='days'>{thisDay.map(mappedDate)}</div>
         </div>
       </div>
     </div>
@@ -194,5 +182,9 @@ export default styled(RawCalendar)`
   }
   .date-picker .dates .days .day .selected {
     background-color: #00ca85;
+    &:hover,
+    &:active {
+      background-color: #00ca85;
+    }
   }
 `;

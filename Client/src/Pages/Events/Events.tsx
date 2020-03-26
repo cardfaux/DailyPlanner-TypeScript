@@ -1,8 +1,9 @@
 import React from 'react';
 import styled from 'styled-components';
 
-//import Calendar from '../../Components/Calendar/Calendar';
-import RawCalendar from '../../Components/Calendar/RawCalendar';
+import Calendar from '../../Components/Calendar/Calendar';
+// import NewRaw from '../../Components/Calendar/NewRaw';
+// import RawCalendar from '../../Components/Calendar/RawCalendar';
 import Button from '../../Shared/Components/FormElements/Button/Button';
 
 import { Secondary } from '../../Styles/JS/Colors';
@@ -15,7 +16,7 @@ const Events: React.FunctionComponent = () => {
           Go To Event Logs
         </StyledButton>
       </StyledDiv>
-      <RawCalendar />
+      <Calendar />
     </React.Fragment>
   );
 };
