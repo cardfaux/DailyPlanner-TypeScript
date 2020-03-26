@@ -42,6 +42,8 @@ const MainCalendar: React.FunctionComponent<Props> = () => {
     fetchEvents();
   }, [sendRequest]);
 
+  console.log(events);
+
   return (
     <React.Fragment>
       <ErrorModal error={error} onClear={clearError} />
@@ -57,7 +59,6 @@ const MainCalendar: React.FunctionComponent<Props> = () => {
             defaultView='month'
             events={events}
             localizer={localizer}
-            resizable
           />
         </div>
       )}
