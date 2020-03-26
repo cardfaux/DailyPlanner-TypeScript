@@ -1,7 +1,8 @@
 import React from 'react';
 import styled from 'styled-components';
 
-import Calendar from '../../Components/Calendar/Calendar';
+//import Calendar from '../../Components/Calendar/Calendar';
+import RawCalendar from '../../Components/Calendar/RawCalendar';
 import Button from '../../Shared/Components/FormElements/Button/Button';
 
 import { Secondary } from '../../Styles/JS/Colors';
@@ -14,7 +15,7 @@ const Events: React.FunctionComponent = () => {
           Go To Event Logs
         </StyledButton>
       </StyledDiv>
-      <Calendar />
+      <RawCalendar />
     </React.Fragment>
   );
 };
