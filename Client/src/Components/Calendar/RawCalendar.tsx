@@ -20,6 +20,8 @@ const RawCalendar: React.FunctionComponent<Props> = (props) => {
 
   const [thisMonth, setThisMonth] = useState(date.getMonth());
   const [thisYear, setThisYear] = useState(date.getFullYear());
+  // const [thisDay, setThisDay] = useState(date.getDate());
+  const [thisDay, setThisDay] = useState([]);
 
   const months = [
     'January',
@@ -44,6 +46,7 @@ const RawCalendar: React.FunctionComponent<Props> = (props) => {
       setThisMonth(0);
       setThisYear(thisYear + 1);
     }
+    populateDates();
   };
 
   const goToPreviousMonth = () => {
@@ -52,12 +55,51 @@ const RawCalendar: React.FunctionComponent<Props> = (props) => {
       setThisMonth(11);
       setThisYear(thisYear - 1);
     }
+    populateDates();
+  };
+
+  const formatDate = (date: any) => {
+    let day = date.getDate();
+    if (day < 10) {
+      day = '0' + day;
+    }
+    let month = date.getMonth() + 1;
+    if (month < 10) {
+      month = '0' + month;
+    }
+    let year = date.getFullYear();
+
+    return month + ' / ' + day + ' / ' + year;
+  };
+
+  const populateDates = () => {
+    setThisDay([]);
+
+    let amountOfDays = 31 + 1;
+    if (thisMonth === 2) {
+      amountOfDays = 28;
+    }
+
+    let dateArray = [];
+    for (let i = 1; i < amountOfDays; i++) {
+      //console.log(thisMonth, amountOfDays);
+      dateArray.push(i);
+      //setThisDay(i + 1);
+      //console.log(dateArray);
+    }
+    console.log(dateArray);
+    setThisDay(dateArray);
+    let newDate = dateArray.map(function(number) {
+      return number;
+    });
+    console.log('MAPPED DATES', newDate);
+    console.log('THIS DAY', thisDay);
   };
 
   return (
     <div className={props.className}>
       <div className='date-picker'>
-        <div className='selected-date'>03 / 26 / 2020</div>
+        <div className='selected-date'>{formatDate(date)}</div>
 
         <div className='dates'>
           <div className='month'>
@@ -71,7 +113,14 @@ const RawCalendar: React.FunctionComponent<Props> = (props) => {
             </div>
           </div>
 
-          <div className='days'></div>
+          <div className='days'>
+            {thisDay.map((day) => (
+              <div className='day'>{day}</div>
+            ))}
+            {/* <div className='day'>
+              
+            </div> */}
+          </div>
         </div>
       </div>
     </div>
